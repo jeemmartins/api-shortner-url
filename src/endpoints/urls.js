@@ -1,15 +1,8 @@
-const bs58 = require("bs58");
-
-const urls = new Map();
-
-let index = 0;
+const { createUrl } = require("../functions/createUrl");
+const { getUrl } = require("../functions/getUrl");
 
 exports.urlsPost = (req, res) => {
-  index += 1;
-
-  const id = bs58.encode(Buffer.from(index.toString()));
-
-  urls.set(id, req.body.url);
+  const id = createUrl(req.body.url);
 
   res.status(200).json({
     url: `${process.env.API_URL}/${id}`,
@@ -17,9 +10,7 @@ exports.urlsPost = (req, res) => {
 };
 
 exports.urlsGetById = (req, res) => {
-  const id = req.params.id;
-
-  const url = urls.get(id);
+  const url = getUrl(req.params.id);
 
   if (!url) {
     res.status(404).json({ message: "Not found" });
