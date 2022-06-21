@@ -1,20 +1,12 @@
-const dotenv = require("dotenv");
-
-dotenv.config();
-
 const express = require("express");
-const bodyParser = require("body-parser");
+const router = express.Router();
 const bs58 = require("bs58");
 
 const urls = new Map();
 
 let index = 0;
 
-const app = express();
-
-app.use(bodyParser.json());
-
-app.post("/", (req, res) => {
+router.post("/", (req, res) => {
   index += 1;
 
   const id = bs58.encode(Buffer.from(index.toString()));
@@ -26,7 +18,7 @@ app.post("/", (req, res) => {
   });
 });
 
-app.get("/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
 
   const url = urls.get(id);
@@ -39,6 +31,4 @@ app.get("/:id", (req, res) => {
   res.redirect(url);
 });
 
-app.listen(+process.env.PORT, () =>
-  console.log(`http://localhost:${process.env.PORT}`)
-);
+module.exports = router;
