@@ -1,3 +1,7 @@
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const bs58 = require("bs58");
@@ -18,7 +22,7 @@ app.post("/", (req, res) => {
   urls.set(id, req.body.url);
 
   res.status(200).json({
-    url: `http://localhost:3000/${id}`,
+    url: `${process.env.API_URL}/${id}`,
   });
 });
 
@@ -35,4 +39,6 @@ app.get("/:id", (req, res) => {
   res.redirect(url);
 });
 
-app.listen(3000, () => console.log("http://localhost:3000"));
+app.listen(+process.env.PORT, () =>
+  console.log(`http://localhost:${process.env.PORT}`)
+);
