@@ -1,7 +1,7 @@
 {
   "name": "api-shortner-url",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "author": "Jéssica Martins <jeemmartins@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -11,8 +11,8 @@
     "express": "^4.18.1"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
